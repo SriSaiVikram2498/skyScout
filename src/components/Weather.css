@@ -1,66 +1,144 @@
-.weather{
-    place-self:center;
-    padding: 40px;
-    border-radius:10px;
-    background-image: linear-gradient(45deg,#2f4680,#500ae4);
-    display: flex;
+.weather {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.search-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 250px;
+  margin-right: 10px;
+}
+
+.search-bar img {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+}
+
+.weather-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.temperature {
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.location {
+  font-size: 24px;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.weather-data {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.weather-data .col {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.weather-data img {
+  width: 40px;
+  height: 40px;
+}
+
+.weather-data p {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.weather-data span {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Main layout: current weather on one side, forecast on the other */
+.main-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1200px;
+  gap: 30px; /* Add spacing between the two sections */
+}
+
+.current-day {
+  flex: 1;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.forecast {
+  flex: 2;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.forecast h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.forecast-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.forecast-day {
+  flex: 1 1 calc(25% - 10px);
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.forecast-day p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+/* Responsive for mobile screens */
+@media (max-width: 768px) {
+  .main-layout {
     flex-direction: column;
-    align-items: center; 
-    margin-top: 40px; 
-}
-.search-bar{
-    display: flex;
-    align-items: center;
-    gap:12px;
-}
-.search-bar input{
-    height:50px;
-    border:none;
-    outline:none;
-    border-radius:40px;
-    padding-left:25px;
-    color:#626262;
-    background:#ebfffc;
-    font-size:18px;
-}
-.search-bar img{
-    width: 5opx;
-    padding: 15px;
-    border-radius:50%;
-    background:#ebfffc;
-    cursor:pointer;
-}
-.weather-icon{
-    width: 150px;
-    margin:30px 0;
-}
-.temperature{
-    color:#fff;
-    font-size: 80px;
-    line-height: 1;
-}
-.location{
-    color:#fff;
-    font-size:40px;
-}
-.weather-data{
-    width: 100%;
-    margin-top: 40px;
-    color:#fff;
-    display: flex;
-    justify-content: space-between;
-}
-.weather-data .col{
-    display: flex;
-    align-items: flex-start;
-    gap:12px;
-    font-size:22px;
-}
-.weather-data .col span{
-    display: block;
-    font-size: 16px;
-}
-.weather-data .col img{
-    width:26px ;
-    margin-top: 10px;
+  }
+
+  .forecast-day {
+    flex: 1 1 100%;
+  }
+
+  .search-bar input {
+    width: 200px;
+  }
 }

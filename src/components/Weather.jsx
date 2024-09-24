@@ -12,6 +12,7 @@ import snow_icon from '../assets/snow.png'
 const Weather = () => {
   const inputRef=useRef()
   const [weatherData,setWeatherData]=useState(false);
+  const [forecastData,setForecastData]=useState([]);
   const allIcons={
     "01d":clear_icon,
     "01n":clear_icon,
@@ -41,6 +42,28 @@ const Weather = () => {
         return
       }
       console.log(data);
+
+
+      const lat=data.coord.lat
+      const lon=data.coord.lon
+      const forecastUrl = `https://ai-weather-by-meteosource.p.rapidapi.com/daily?lat=${lat}&lon=${lon}&language=en&units=auto`;
+      const options = {
+        method: 'GET',
+        headers: {
+          'x-rapidapi-key': '4bdc841730msh34b2022a50415cep1b36e8jsne9b7478b1d28',
+          'x-rapidapi-host': 'ai-weather-by-meteosource.p.rapidapi.com'
+        }
+      };
+
+      try {
+        const forecastResponse = await fetch(forecastUrl, options);
+        const forecastData = await forecastResponse.json();
+        setForecastData(forecastData.daily.data.slice(0,7));
+        console.log(forecastData);
+      } catch (error) {
+        console.error(error);
+      }
+
       const icon=allIcons[data.weather[0].icon] || clear_icon;
       setWeatherData({
         humidity:data.main.humidity,
@@ -82,7 +105,24 @@ const Weather = () => {
         </div>
       </div>
       </>:<></>}
-      
+      {forecastData.length>0 && (
+      <div className="forecast">
+        <h2>7-Day Forecast</h2>
+        <div className="forecast-grid">
+          {forecastData.map((day, index) => (
+            <div key={index} className="forecast-day">
+              <h4>{new Date(day.day).toLocaleDateString('en-US', { weekday: 'long' })}</h4>
+              <p>{new Date(day.day).toLocaleDateString()}</p>
+              <p>Max Temp: {day.temperature_max}°C</p>
+              <p>Min Temp: {day.temperature_min}°C</p>
+              <p>Humidity: {day.humidity} %</p>
+              <p>Wind Speed: {day.wind.speed} km/h</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+        )}
     </div>
   );
 }
